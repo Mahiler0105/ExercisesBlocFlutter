@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bloc.exercises.bloc_exercises">
+    package="com.espimon.bloc_exercises">
    <application
         android:label="bloc_exercises"
         android:name="${applicationName}"
