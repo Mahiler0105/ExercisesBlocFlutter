@@ -68,11 +68,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     print(token);
   }
 
-  void handleRemoteMessage(RemoteMessage message) {
+  void handleRemoteMessage(RemoteMessage message, bool isForeground) {
     if (message.notification == null) return;
 
     final pushMessage = message.mapToPushMessage();
-    if (showLocalNotification != null) {
+    if (showLocalNotification != null && isForeground) {
       showLocalNotification!(
         id: ++pushNumberId,
         body: pushMessage.body,
@@ -85,7 +85,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   }
 
   void _onForegroundMessage() =>
-      FirebaseMessaging.onMessage.listen(handleRemoteMessage);
+      FirebaseMessaging.onMessage.listen((message) => handleRemoteMessage(message, true));
 
   void requestPermission() async {
     NotificationSettings settings = await messaging.requestPermission(

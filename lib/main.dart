@@ -61,7 +61,7 @@ class _HandleNotificationInteractionsState
   }
 
   void _handleMessage(RemoteMessage message) {
-    context.read<NotificationsBloc>().handleRemoteMessage(message);
+    context.read<NotificationsBloc>().handleRemoteMessage(message, false);
     final messageId = message.getValidMessageId();
     appRouter.push("/notifications/$messageId");
   }
